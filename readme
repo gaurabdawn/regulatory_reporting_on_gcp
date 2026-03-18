@@ -1,1 +1,35 @@
+# Banking Regulatory Reporting Data Platform (GCP)
 
+## Architecture
+- GCS (Raw Layer)
+- BigQuery (Bronze, Silver, Gold)
+- Cloud Composer (Airflow)
+- Terraform (IaC)
+
+## Dataset
+Czech Financial Dataset (Kaggle)
+
+## Key Features
+- Medallion Architecture
+- External Table → Raw Table ingestion
+- Partitioned BigQuery tables
+- Data Quality Checks
+- Regulatory reporting layer
+
+## Pipeline Flow
+1. Data ingestion → GCS
+2. External table validation
+3. Bronze load
+4. Silver transformation
+5. Gold reporting
+
+## Tech Stack
+- GCP (BigQuery, GCS, Composer)
+- Terraform
+- SQL
+- Python (Airflow)
+
+## How to Run
+1. Terraform apply
+2. Upload data to GCS
+3. Trigger Airflow DAG
