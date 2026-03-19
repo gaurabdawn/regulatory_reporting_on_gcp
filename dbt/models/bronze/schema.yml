@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: account
+    description: "One to One mapping of account table"
+    columns:
+      - name: account_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
