@@ -49,7 +49,7 @@ Terraform → Infrastructure as Code
 
 ## 📊 DATASET
 
-Czech Financial Dataset (Kaggle)
+Czech Financial Dataset (Kaggle) https://www.kaggle.com/datasets/mariammariamr/1999-czech-financial-dataset
 
 Banking domain: accounts, transactions, loans, clients
 
