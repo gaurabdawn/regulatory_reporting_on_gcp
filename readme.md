@@ -1,6 +1,6 @@
 ## 🏦 Banking Regulatory Reporting Data Platform | GCP Medallion Architecture
 
-## 🏗️ System Architecture
+## ⚙️ System Architecture
 ```mermaid
 flowchart TB
 
@@ -39,14 +39,9 @@ flowchart TB
     H --> F
 ```
 
-## ⚙️ ARCHITECTURE
-
 GCS → Raw data layer
-
 BigQuery → Bronze, Silver, Gold layers
-
 Cloud Composer (Airflow) → Orchestration
-
 Terraform → Infrastructure as Code
 
 ## 📊 DATASET
