@@ -20,7 +20,7 @@ I --> D
 I --> H
 ```
 
-🔷 ARCHITECTURE
+## 🔷 ARCHITECTURE
 
 GCS → Raw data layer
 
@@ -30,13 +30,13 @@ Cloud Composer (Airflow) → Orchestration
 
 Terraform → Infrastructure as Code
 
-🔷 DATASET
+## 🔷 DATASET
 
 Czech Financial Dataset (Kaggle)
 
 Banking domain: accounts, transactions, loans, clients
 
-🔷 KEY FEATURES
+## 🔷 KEY FEATURES
 
 Medallion Architecture (Bronze → Silver → Gold)
 
@@ -48,7 +48,7 @@ Data Quality Checks
 
 Regulatory Reporting Layer
 
-🔷 PIPELINE FLOW
+## 🔷 PIPELINE FLOW
 
 Data ingestion → GCS
 
@@ -60,7 +60,7 @@ Silver transformation
 
 Gold reporting
 
-🔷 TECH STACK
+## 🔷 TECH STACK
 
 Cloud: GCP (BigQuery, GCS, Composer)
 
