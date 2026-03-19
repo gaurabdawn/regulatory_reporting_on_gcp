@@ -3,21 +3,25 @@
 ## 🏗️ System Architecture
 ```mermaid
 flowchart LR
-A[Kaggle Dataset] --> B[GCS Raw Layer]
-B --> C[External Tables]
-C --> D[Bronze Layer]
-D --> E[Silver Layer]
-E --> F[Gold Layer]
-F --> G[Reporting]
+    A[Kaggle Dataset] --> B[GCS Raw Layer]
 
-H[Airflow Composer] --> C
-H --> D
-H --> E
-H --> F
+    B --> C[Pub/Sub Ingestion]
+    C --> D[BigQuery Bronze Layer]
+    D --> E[BigQuery Silver Layer]
+    E --> F[BigQuery Gold Layer]
 
-I[Terraform] --> B
-I --> D
-I --> H
+    F --> G[Looker Studio Reporting]
+
+    H[Cloud Composer Airflow] --> B
+    H --> D
+    H --> E
+    H --> F
+
+    I[Terraform IaC] --> B
+    I --> D
+    I --> E
+    I --> F
+    I --> H
 ```
 
 ## 🔷 ARCHITECTURE
