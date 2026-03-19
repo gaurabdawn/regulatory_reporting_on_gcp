@@ -2,38 +2,41 @@
 
 ## 🏗️ System Architecture
 ```mermaid
-flowchart LR
+flowchart TB
 
-    %% ---------------- INGESTION ----------------
-    A[Kaggle Dataset] --> B[GCS Raw Storage]
+    %% ----------- INGESTION -----------
+    A[Source Systems] --> B[Pub/Sub]
+    B --> C[GCS Raw Bucket]
 
-    A --> C[Pub/Sub Streaming Ingestion]
+    %% ----------- BIGQUERY MEDALLION -----------
+    subgraph D[BigQuery Data Platform]
+        D1[Bronze Layer]
+        D2[Silver Layer]
+        D3[Gold Layer]
 
-    %% ---------------- BRONZE ----------------
-    B --> D[BigQuery Bronze Layer]
-    C --> D
+        D1 --> D2 --> D3
+    end
 
-    %% ---------------- TRANSFORM ----------------
-    D --> E[BigQuery Silver Layer]
-    E --> F[BigQuery Gold Layer]
+    C --> D1
 
-    %% ---------------- SERVING ----------------
-    F --> G[Looker Studio Reporting]
+    %% ----------- SERVING -----------
+    D3 --> E[Looker Studio Reporting]
 
-    %% ---------------- ORCHESTRATION ----------------
-    H[Cloud Composer Airflow] --> D
-    H --> E
+    %% ----------- ORCHESTRATION -----------
+    F[Cloud Composer Airflow] --> C
+    F --> D1
+    F --> D2
+    F --> D3
+
+    %% ----------- GOVERNANCE -----------
+    G[Data Quality Checks] --> D1
+    G --> D2
+    G --> D3
+
+    %% ----------- INFRA -----------
+    H[Terraform IaC] --> C
+    H --> D
     H --> F
-
-    %% ---------------- GOVERNANCE ----------------
-    I[Data Quality Checks] --> D
-    I --> E
-    I --> F
-
-    %% ---------------- INFRA ----------------
-    J[Terraform IaC] --> B
-    J --> D
-    J --> H
 ```
 
 ## 🔷 ARCHITECTURE
