@@ -5,24 +5,21 @@
 ```mermaid
 flowchart LR
 
-    A[Kaggle Dataset\n(Czech Financial Data)] --> B[GCS Bucket\nRaw Layer]
+    A[Kaggle Dataset - Czech Financial Data] --> B[GCS Raw Layer]
 
-    B --> C[BigQuery External Tables\nSchema Validation]
+    B --> C[BigQuery External Tables]
+    C --> D[BigQuery Bronze Raw Tables]
+    D --> E[BigQuery Silver Cleaned Layer]
+    E --> F[BigQuery Gold Reporting Layer]
 
-    C --> D[BigQuery Bronze Layer\nRaw Tables]
+    F --> G[BI Analytics Reporting]
 
-    D --> E[BigQuery Silver Layer\nCleaned & Standardized]
-
-    E --> F[BigQuery Gold Layer\nRegulatory Reporting]
-
-    F --> G[BI / Analytics / Reporting]
-
-    H[Cloud Composer\n(Airflow DAGs)] --> C
+    H[Cloud Composer Airflow] --> C
     H --> D
     H --> E
     H --> F
 
-    I[Terraform\n(IaC)] --> B
+    I[Terraform IaC] --> B
     I --> D
     I --> E
     I --> F
