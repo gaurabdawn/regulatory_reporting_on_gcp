@@ -69,15 +69,14 @@ Regulatory Reporting Layer
 
 ## 🔄 PIPELINE
 
-Data ingestion → GCS
-
-External table validation
-
-Bronze layer load
-
-Silver transformation
-
-Gold reporting
+```mermaid
+flowchart LR
+    A[Data Ingestion] --> B[GCS Raw Layer]
+    B --> C[External Table Validation]
+    C --> D[Bronze Layer]
+    D --> E[Silver Layer]
+    E --> F[Gold Reporting]
+```
 
 ## 🛠️  TECH STACK
 
