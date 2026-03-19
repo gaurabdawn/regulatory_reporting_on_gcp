@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    database: reg-reporting-490417
+    schema: regreport_raw
+
+    tables:
+      - name: account_ext
+      - name: card_ext
+      - name: client_ext
+      - name: disp_ext
+      - name: district_ext
+      - name: loan_ext
+      - name: order_ext
+      - name: transactions_ext
