@@ -67,7 +67,7 @@ Data Quality Checks
 
 Regulatory Reporting Layer
 
-## 🔄 PIPELINE FLOW
+## 🔄 PIPELINE
 
 Data ingestion → GCS
 
