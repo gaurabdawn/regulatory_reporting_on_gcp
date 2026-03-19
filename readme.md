@@ -1,29 +1,23 @@
 🏦 Banking Regulatory Reporting Data Platform (GCP)
 
 ## 🏗️ System Architecture
-
 ```mermaid
 flowchart LR
+A[Kaggle Dataset] --> B[GCS Raw Layer]
+B --> C[External Tables]
+C --> D[Bronze Layer]
+D --> E[Silver Layer]
+E --> F[Gold Layer]
+F --> G[Reporting]
 
-    A[Kaggle Dataset - Czech Financial Data] --> B[GCS Raw Layer]
+H[Airflow Composer] --> C
+H --> D
+H --> E
+H --> F
 
-    B --> C[BigQuery External Tables]
-    C --> D[BigQuery Bronze Raw Tables]
-    D --> E[BigQuery Silver Cleaned Layer]
-    E --> F[BigQuery Gold Reporting Layer]
-
-    F --> G[BI Analytics Reporting]
-
-    H[Cloud Composer Airflow] --> C
-    H --> D
-    H --> E
-    H --> F
-
-    I[Terraform IaC] --> B
-    I --> D
-    I --> E
-    I --> F
-    I --> H
+I[Terraform] --> B
+I --> D
+I --> H
 
 🔷 ARCHITECTURE
 
