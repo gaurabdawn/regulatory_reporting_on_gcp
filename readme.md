@@ -1,4 +1,4 @@
-🏦 Banking Regulatory Reporting Data Platform (GCP)
+## 🏦 Banking Regulatory Reporting Data Platform (GCP)
 
 ## 🏗️ System Architecture
 ```mermaid
