@@ -40,8 +40,11 @@ flowchart TB
 ```
 
 GCS → Raw data layer
+
 BigQuery → Bronze, Silver, Gold layers
+
 Cloud Composer (Airflow) → Orchestration
+
 Terraform → Infrastructure as Code
 
 ## 📊 DATASET
