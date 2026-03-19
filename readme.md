@@ -18,6 +18,7 @@ H --> F
 I[Terraform] --> B
 I --> D
 I --> H
+```
 
 🔷 ARCHITECTURE
 
