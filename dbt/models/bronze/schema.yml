@@ -10,3 +10,45 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: card
+    description: "One to One mapping of card table"
+    columns:
+      - name: card_id
+        description: "The primary key for this table"
+  
+  - name: client
+    description: "One to One mapping of client table"
+    columns:
+      - name: client_id
+        description: "The primary key for this table"
+  
+  - name: disposition
+    description: "One to One mapping of disp table"
+    columns:
+      - name: disp_id
+        description: "The primary key for this table"
+
+  - name: district
+    description: "One to One mapping of district table"
+    columns:
+      - name: A1
+        description: "The primary key for this table"
+
+  - name: loan
+    description: "One to One mapping of loan table"
+    columns:
+      - name: loan_id
+        description: "The primary key for this table"
+  
+  - name: order
+    description: "One to One mapping of order table"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+
+  - name: transactions
+    description: "One to One mapping of transactions table"
+    columns:
+      - name: trans_id
+        description: "The primary key for this table"

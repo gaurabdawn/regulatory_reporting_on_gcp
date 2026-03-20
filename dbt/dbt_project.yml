@@ -37,3 +37,6 @@ models:
     
     silver:
       +schema: silver
+
+    gold:
+      +schema: gold

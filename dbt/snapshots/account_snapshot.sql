@@ -2,7 +2,7 @@
 
 {{
     config(
-        target_schema='regreport_silver',
+        target_schema='regreport_gold',
         unique_key='account_id',
         strategy='check',
         check_cols=['date', 'frequency'],
@@ -15,6 +15,6 @@ select
     district_id,
     frequency,
     date
-from {{ source('bronze', 'account') }}
+from {{ source('silver', 'incremental_account') }}
 
 {% endsnapshot %}
