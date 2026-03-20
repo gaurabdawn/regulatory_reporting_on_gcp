@@ -14,3 +14,10 @@ sources:
       - name: loan_ext
       - name: order_ext
       - name: transactions_ext
+
+  - name: bronze
+    database: reg-reporting-490417
+    schema: regreport_bronze
+
+    tables:
+      - name: account
