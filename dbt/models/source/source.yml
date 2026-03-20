@@ -21,3 +21,19 @@ sources:
 
     tables:
       - name: account
+
+  - name: silver
+    database: reg-reporting-490417
+    schema: regreport_silver
+
+    tables:
+      - name: incremental_client
+      - name: incremental_account
+
+  - name: gold
+    database: reg-reporting-490417
+    schema: regreport_gold
+
+    tables:
+      - name: account_snapshot
+      - name: client_snapshot

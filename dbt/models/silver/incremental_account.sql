@@ -2,15 +2,14 @@
     config(
         materialized='incremental',
         incremental_strategy='merge',
-        unique_key=['loan_id']
+        unique_key=['account_id']
     ) 
 }}
 
 select
-    loan_id,
     account_id,
-    amount,
-    payments,
-    status,
+    district_id,
+    frequency,
+    date,
     current_timestamp as ingested_at
-from {{ ref('loan') }}
+from {{ ref('account') }}
