@@ -3,40 +3,79 @@
 ## ⚙️ System Architecture
 ```mermaid
 flowchart TB
+    %% ── INGESTION ──────────────────────────────────────
+    A([🗄️ Source Systems]) --> B[📨 Pub/Sub]
 
-    %% ----------- INGESTION -----------
-    A[Source Systems] --> B[Pub/Sub]
-    B --> C[GCS Raw Bucket]
-
-    %% ----------- BIGQUERY MEDALLION -----------
-    subgraph D[BigQuery Data Platform]
-        D1[Bronze Layer]
-        D2[Silver Layer]
-        D3[Gold Layer]
-
-        D1 --> D2 --> D3
+    subgraph CF["⚡ Cloud Functions"]
+        direction TB
+        CF1[📥 Subscriber Function\nConsumes Pub/Sub events]
+        CF2[🔄 Transform Function\nParse & validate payload]
+        CF3[💾 Storage Writer\nWrite to GCS]
+        CF1 --> CF2 --> CF3
     end
 
+    B -->|triggers| CF1
+    CF3 --> C[🪣 GCS Raw Bucket]
+
+    %% ── BIGQUERY MEDALLION ─────────────────────────────
+    subgraph BQ["☁️ BigQuery Data Platform"]
+        direction LR
+        D1[🥉 Bronze\nRaw Ingestion]
+        D2[🥈 Silver\nCleaned & Joined]
+        D3[🥇 Gold\nBusiness-Ready]
+        D1 --> D2 --> D3
+    end
     C --> D1
 
-    %% ----------- SERVING -----------
-    D3 --> E[Looker Studio Reporting]
+    %% ── SERVING ────────────────────────────────────────
+    D3 --> E([📊 Looker Studio\nRegulatory Reporting])
 
-    %% ----------- ORCHESTRATION -----------
-    F[Cloud Composer Airflow] --> C
-    F --> D1
-    F --> D2
-    F --> D3
+    %% ── ORCHESTRATION ──────────────────────────────────
+    subgraph ORC["⚙️ Orchestration"]
+        F[🎼 Cloud Composer\nAirflow DAGs]
+    end
+    F -.->|triggers| C
+    F -.->|triggers dbt| D1
+    F -.->|triggers dbt| D2
+    F -.->|triggers dbt| D3
 
-    %% ----------- GOVERNANCE -----------
-    G[Data Quality Checks] --> D1
-    G --> D2
-    G --> D3
+    %% ── GOVERNANCE ─────────────────────────────────────
+    subgraph GOV["🔍 Governance"]
+        G[✅ Data Quality Checks]
+    end
+    G -.->|validates| D1
+    G -.->|validates| D2
+    G -.->|validates| D3
 
-    %% ----------- INFRA -----------
-    H[Terraform IaC] --> C
-    H --> D
-    H --> F
+    %% ── INFRA ──────────────────────────────────────────
+    subgraph IaC["🏗️ Infrastructure"]
+        H[🔧 Terraform]
+    end
+    H -.->|provisions| C
+    H -.->|provisions| BQ
+    H -.->|provisions| ORC
+    H -.->|provisions| CF
+
+    %% ── STYLING ────────────────────────────────────────
+    classDef ingestion  fill:#e8d5f5,stroke:#7c3aed,color:#3b0764
+    classDef functions  fill:#fef9c3,stroke:#ca8a04,color:#713f12
+    classDef bronze     fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef silver     fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef gold       fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef serving    fill:#ffe4e6,stroke:#e11d48,color:#881337
+    classDef orch       fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef gov        fill:#ecfdf5,stroke:#059669,color:#064e3b
+    classDef infra      fill:#f1f5f9,stroke:#64748b,color:#1e293b
+
+    class A,B,C ingestion
+    class CF1,CF2,CF3 functions
+    class D1 bronze
+    class D2 silver
+    class D3 gold
+    class E serving
+    class F orch
+    class G gov
+    class H infra
 ```
 
 GCS → Raw data layer
