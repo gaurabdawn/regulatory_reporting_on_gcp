@@ -5,17 +5,8 @@
 flowchart TB
     %% ── INGESTION ──────────────────────────────────────
     A([🗄️ Source Systems]) --> B[📨 Pub/Sub]
-
-    subgraph CF["⚡ Cloud Functions"]
-        direction TB
-        CF1[📥 Subscriber Function\nConsumes Pub/Sub events]
-        CF2[🔄 Transform Function\nParse & validate payload]
-        CF3[💾 Storage Writer\nWrite to GCS]
-        CF1 --> CF2 --> CF3
-    end
-
-    B -->|triggers| CF1
-    CF3 --> C[🪣 GCS Raw Bucket]
+    B -->|triggers| CF[⚡ Cloud Function\nSubscribe → Transform → Write]
+    CF --> C[🪣 GCS Raw Bucket]
 
     %% ── BIGQUERY MEDALLION ─────────────────────────────
     subgraph BQ["☁️ BigQuery Data Platform"]
@@ -39,14 +30,6 @@ flowchart TB
     F -.->|triggers dbt| D2
     F -.->|triggers dbt| D3
 
-    %% ── GOVERNANCE ─────────────────────────────────────
-    subgraph GOV["🔍 Governance"]
-        G[✅ Data Quality Checks]
-    end
-    G -.->|validates| D1
-    G -.->|validates| D2
-    G -.->|validates| D3
-
     %% ── INFRA ──────────────────────────────────────────
     subgraph IaC["🏗️ Infrastructure"]
         H[🔧 Terraform]
@@ -64,17 +47,15 @@ flowchart TB
     classDef gold       fill:#dcfce7,stroke:#16a34a,color:#14532d
     classDef serving    fill:#ffe4e6,stroke:#e11d48,color:#881337
     classDef orch       fill:#ede9fe,stroke:#7c3aed,color:#3b0764
-    classDef gov        fill:#ecfdf5,stroke:#059669,color:#064e3b
     classDef infra      fill:#f1f5f9,stroke:#64748b,color:#1e293b
 
     class A,B,C ingestion
-    class CF1,CF2,CF3 functions
+    class CF functions
     class D1 bronze
     class D2 silver
     class D3 gold
     class E serving
     class F orch
-    class G gov
     class H infra
 ```
 
