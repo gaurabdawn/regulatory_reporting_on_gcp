@@ -34,7 +34,7 @@ flowchart TB
     subgraph IaC["🏗️ Infrastructure"]
         H[🔧 Terraform]
     end
-    H -.->|provisions| C
+    H -.->|provisions| A
     H -.->|provisions| BQ
     H -.->|provisions| ORC
     H -.->|provisions| CF
