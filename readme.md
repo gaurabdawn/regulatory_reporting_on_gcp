@@ -37,7 +37,7 @@ flowchart TB
     H -.->|provisions| B
     H -.->|provisions| BQ
     H -.->|provisions| ORC
-    H -.->|provisions| CF
+    H -.->|provisions| C
 
     %% ── STYLING ────────────────────────────────────────
     classDef ingestion  fill:#e8d5f5,stroke:#7c3aed,color:#3b0764
