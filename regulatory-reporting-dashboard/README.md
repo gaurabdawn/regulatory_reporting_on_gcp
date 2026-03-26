@@ -19,3 +19,4 @@ Built using Looker Studio connected to BigQuery view:
 `gold_layer.customer_financial_summary`
 
 <img width="555" height="287" alt="image" src="https://github.com/user-attachments/assets/69f20012-6dce-4cee-9ec0-966ea1824532" />
+<img width="578" height="134" alt="image" src="https://github.com/user-attachments/assets/39f1d682-06f0-4cf9-af1c-ce863ae9315e" />
