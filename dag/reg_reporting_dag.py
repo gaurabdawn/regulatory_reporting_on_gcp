@@ -85,7 +85,17 @@ EOF
         """
     )
 
-    # 6️⃣ Run GOLD
+    # 6️⃣ Run Snapshot
+    dbt_snapshot = BashOperator(
+        task_id="dbt_snapshot",
+        bash_command=f"""
+        export DBT_PROFILES_DIR={PROFILES_DIR}
+        cd {DBT_DIR}
+        dbt snapshot
+        """
+    )
+
+    # 7️⃣ Run GOLD 
     dbt_gold = BashOperator(
         task_id="dbt_gold",
         bash_command=f"""
@@ -96,4 +106,4 @@ EOF
     )
 
     # DAG flow
-    clone_repo >> create_profile >> dbt_deps >> dbt_bronze >> dbt_silver >> dbt_gold
+    clone_repo >> create_profile >> dbt_deps >> dbt_bronze >> dbt_silver >> dbt_snapshot >> dbt_gold
